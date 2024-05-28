@@ -25,6 +25,14 @@ jobs:
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
         run: echo "$JOB_CONTEXT"
+      - name: Print Title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: echo "$PR_TITLE"
+      - name: Print Body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: echo "$PR_BODY"
       - run: |
           echo The PR was merged - #"$PR_NUMBER"
           echo The PR Event - "$PR_EVENT"
