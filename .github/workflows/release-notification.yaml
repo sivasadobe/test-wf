@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 env:
-  PR_EVENT: ${{ github.event }}
   PR_NUMBER: ${{ github.event.number }}
 
 jobs:
