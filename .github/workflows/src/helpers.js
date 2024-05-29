@@ -16,7 +16,7 @@ function convertMarkdownToSlackFormat(markdown) {
   markdown = markdown.replace(/^\s*\d+\.\s+(.*$)/gim, "1. $1");
   // Convert newlines to break lines
   markdown = markdown.replace(/\n/g, "\n");
-
+  console.log("After Conversion", markdown);
   return markdown.trim();
 }
 
