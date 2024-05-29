@@ -19,12 +19,14 @@ env:
 
 jobs:
   if_merged:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: cc-test-release
     env:
       EVENT_PR: ${{ toJson(github.event.pull_request) }}
     steps:
+      - name: Print EVENT_PR
+        run: |
+          echo $EVENT_PR
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Sending Notification - Slack
