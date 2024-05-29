@@ -17,10 +17,10 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: cc-test-release
+    env:
+      PR_BODY: ${{ github.event.pull_request.body }}
     steps:
       - name: Print Body
-        env:
-          PR_BODY: ${{ github.event.pull_request.body }}
         run: echo "$PR_BODY"
       - name: Checkout repository
         uses: actions/checkout@v4
