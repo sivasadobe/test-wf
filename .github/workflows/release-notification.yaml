@@ -1,4 +1,4 @@
-name: release-notification
+name: On PR Closed
 
 on:
   pull_request:
@@ -18,10 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: cc-test-release
     env:
-      PR_BODY: ${{ github.event.pull_request.body }}
+      EVENT_PR: ${{ github.event.pull_request }}
     steps:
-      - name: Print Body
-        run: echo "$PR_BODY"
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Sending Notification - Slack
@@ -29,4 +27,4 @@ jobs:
         with:
           script: |
             const sendSlackMessage = require('./.github/workflows/send-slack.js')
-            sendSlackMessage(process.env.PR_BODY,process.env.CC_SLACK_WEBHOOK)
+            sendSlackMessage(process.env.EVENT_PR,process.env.CC_SLACK_WEBHOOK)
