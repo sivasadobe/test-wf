@@ -5,4 +5,4 @@ const sendSlackNotification = (slackMessage, slack_webhook_url) => {
   }).catch(console.error);
 };
 
-export default sendSlackNotification;
+module.exports = sendSlackNotification;
