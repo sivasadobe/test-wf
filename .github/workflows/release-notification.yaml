@@ -29,4 +29,4 @@ jobs:
         with:
           script: |
             const sendSlackMessage = require('./.github/workflows/send-slack.js')
-            sendSlackMessage(github.event.pull_request.body,process.env.CC_SLACK_WEBHOOK)
+            sendSlackMessage(process.env.PR_BODY,process.env.CC_SLACK_WEBHOOK)
