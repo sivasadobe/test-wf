@@ -1,6 +1,8 @@
 const { convertMarkdownToSlackFormat } = require("./helpers");
 
 const sendSlackMessage = async (event_pr, slack_webhook_url) => {
+  console.log("typeof event_pr", typeof event_pr);
+  event_pr = JSON.parse(event_pr);
   const { number, html_url, title, body } = event_pr;
 
   console.log({
