@@ -38,9 +38,6 @@ jobs:
         with:
           script: |
             const prNumber = ${{ github.event.inputs.pr_number }}
-            const octokit = require('@octokit/rest');
-
-
             async function getPRDetails(number) {
               try {
                 const response = await github.pulls.get({
