@@ -7,14 +7,8 @@ on:
     types:
       - closed
   workflow_dispatch:
-    inputs:
-      pr_number:
-        description: "Pull Request Number"
-        required: true
-        default: ""
 
 env:
-  PR_NUMBER: ${{ github.event.number }}
   CC_SLACK_WEBHOOK: ${{ secrets.CC_SLACK_WEBHOOK }}
 
 jobs:
