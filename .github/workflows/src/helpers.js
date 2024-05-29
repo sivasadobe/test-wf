@@ -1,4 +1,5 @@
 function convertMarkdownToSlackFormat(markdown) {
+  console.log(markdown);
   // Convert headings
   markdown = markdown.replace(/^(#+) (.*$)/gim, "*$2*");
   // Convert bold text
