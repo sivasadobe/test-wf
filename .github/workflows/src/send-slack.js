@@ -14,7 +14,7 @@ const sendSlackMessage = async (event_pr, slack_webhook_url) => {
     env_pr: process.env.EVENT_PR,
   });
 
-  const text = `:rocket: *Production Release*\n*Title:* ${title} | <${html_url}|#${number}>\n*PR Description:* ${convertMarkdownToSlackFormat(
+  const text = `:rocket: *Production Release*\n\n*Title:* ${title} | <${html_url}|#${number}>\n*PR Description:*\n ${convertMarkdownToSlackFormat(
     body
   )}`;
   console.log("text", text);
