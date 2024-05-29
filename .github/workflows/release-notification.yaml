@@ -22,6 +22,8 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: echo "$PR_BODY"
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Sending Notification - Slack
         uses: actions/github-script@v7
         with:
