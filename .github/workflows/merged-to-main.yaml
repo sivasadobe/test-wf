@@ -76,5 +76,5 @@ jobs:
               number:process.env.PR_NUMBER, 
               html_url:process.env.REPO_URL+"/pull/"+process.env.PR_NUMBER, 
               title:process.env.PR_TITLE, 
-              body:process.env.PR_DESC
+              body:String(process.env.PR_DESC).split("\r\n").join("\n")
             }),process.env.CC_SLACK_WEBHOOK)
