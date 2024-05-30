@@ -9,9 +9,9 @@ function convertMarkdownToSlackFormat(markdown) {
   // Convert block quotes
   markdown = markdown.replace(/^> (.*$)/gim, "_$1_");
   // Convert unordered lists
-  markdown = markdown.replace(/^\s*[-+*]\s+(.*$)/gim, "- $1");
+  markdown = markdown.replace(/^\s*[-+*]\s+(.*$)/gim, "\t• $1");
   // Convert ordered lists
-  markdown = markdown.replace(/^\s*\d+\.\s+(.*$)/gim, "1. $1");
+  markdown = markdown.replace(/^\s*\d+\.\s+(.*$)/gim, "\t1. $1");
   // Convert headings
   markdown = markdown.replace(/^(#+) (.*$)/gim, "*$2*");
   // Convert newlines to break lines

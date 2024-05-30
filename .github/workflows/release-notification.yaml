@@ -1,4 +1,4 @@
-name: On PR Closed
+name: Merged to Main
 
 on:
   pull_request:
@@ -12,8 +12,9 @@ env:
   CC_SLACK_WEBHOOK: ${{ secrets.CC_SLACK_WEBHOOK }}
 
 jobs:
-  if_merged:
+  merged_to_main:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_dispatch' && github.event.pull_request.merged == true }}
     environment: cc-test-release
     env:
       EVENT_PR: ${{ toJson(github.event.pull_request) }}
@@ -26,3 +27,42 @@ jobs:
           script: |
             const sendSlackMessage = require('./.github/workflows/src/send-slack.js')
             sendSlackMessage(process.env.EVENT_PR,process.env.CC_SLACK_WEBHOOK)
+  workflow_dispatch_event:
+    runs-on: ubuntu-latest
+    environment:
+      name: cc-test-release
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    steps:
+      - name: Check repository
+        uses: actions/checkout@v4
+      - name: Set PR_DESC env variable
+        id: set_pr_desc
+        run: |
+          PR_DESC="- https://github.com/sivasadobe/test-wf/pull/5\n"
+          PR_DESC+="- https://github.com/sivasadobe/test-wf/pull/4\n"
+          PR_DESC+="- https://github.com/sivasadobe/test-wf/pull/3\n"
+          PR_DESC+="- https://github.com/sivasadobe/test-wf/pull/2\n"
+          PR_DESC+="- https://github.com/sivasadobe/test-wf/pull/1\n"
+          PR_DESC+="\n"
+          PR_DESC+="### common base root URLs\n"
+          PR_DESC+="**Homepage:** https://www.stage.adobe.com/\n"
+          PR_DESC+="**BACOM:** https://business.stage.adobe.com/fr/\n"
+          PR_DESC+="**CC:** https://www.stage.adobe.com/creativecloud.html\n"
+          PR_DESC+="**Blog:** https://blog.stage.adobe.com/\n"
+          PR_DESC+="**Acrobat:** https://www.stage.adobe.com/acrobat/online/sign-pdf.html\n"
+          echo "::set-output name=pr_desc::$PR_DESC"
+      - name: Sending Notification - Slack
+        uses: actions/github-script@v7
+        env:
+          REPO_URL: ${{github.event.repository.html_url}}
+          PR_TITLE: "[Release] Stage to Main"
+          PR_DESC: ${{ steps.set_pr_desc.outputs.pr_desc }}
+        with:
+          script: |
+            const sendSlackMessage = require('./.github/workflows/src/send-slack.js')
+            sendSlackMessage({
+              number:12, 
+              html_url:process.env.REPO_URL, 
+              title:process.env.REPO_URL, 
+              body:process.env.PR_DESC
+            },process.env.CC_SLACK_WEBHOOK)
