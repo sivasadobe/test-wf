@@ -50,7 +50,7 @@ jobs:
           PR_DESC+="**CC:** https://www.stage.adobe.com/creativecloud.html\n"
           PR_DESC+="**Blog:** https://blog.stage.adobe.com/\n"
           PR_DESC+="**Acrobat:** https://www.stage.adobe.com/acrobat/online/sign-pdf.html\n"
-          echo echo "pr_desc=$PR_DESC" >> $GITHUB_OUTPUT
+          echo "pr_desc=$PR_DESC" >> $GITHUB_OUTPUT
       - name: Sending Notification - Slack
         uses: actions/github-script@v7
         env:
