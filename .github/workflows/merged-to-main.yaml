@@ -17,6 +17,7 @@ on:
         description: "Title for the PR"
         default: "TEST | [Release] Stage to Main"
       body:
+        type: string
         description: "Description for the PR"
         required: true
 
