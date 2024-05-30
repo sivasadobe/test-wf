@@ -60,9 +60,9 @@ jobs:
         with:
           script: |
             const sendSlackMessage = require('./.github/workflows/src/send-slack.js')
-            sendSlackMessage({
+            sendSlackMessage(JSON.stringify({
               number:12, 
               html_url:process.env.REPO_URL, 
               title:process.env.REPO_URL, 
               body:process.env.PR_DESC
-            },process.env.CC_SLACK_WEBHOOK)
+            }),process.env.CC_SLACK_WEBHOOK)
