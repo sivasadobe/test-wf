@@ -18,9 +18,11 @@ const sendSlackMessage = async (pr_event, slack_webhook_url) => {
   });
 
   // Format message text for Slack
-  const text = `:rocket: *Production Release*\n\n
-  *Title:* ${title} | <${html_url}|#${number}>\n
-  *PR Description:*\n ${convertMarkdownToSlackFormat(body)}`;
+  const text = `\n
+:rocket: *Production Release*\n\n
+*TITLE:* ${title} | <${html_url}|#${number}>\n
+*PR DESCRIPTION:*\n ${convertMarkdownToSlackFormat(body)}
+`;
 
   console.log("slack text", text);
 
