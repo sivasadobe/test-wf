@@ -1,8 +1,14 @@
 const { convertMarkdownToSlackFormat } = require("./helpers");
 
-const sendSlackMessage = async (event_pr, slack_webhook_url) => {
-  event_pr = JSON.parse(event_pr);
-  const { number, html_url, title, body } = event_pr;
+/**
+ * Function to send Slack message
+ * @param {string} pr_event - JSON string containing pull request details
+ * @param {string} slack_webhook_url - Slack webhook URL
+ * @returns {Promise} - Promise representing the result of the Slack message sending process
+ */
+const sendSlackMessage = async (pr_event, slack_webhook_url) => {
+  pr_event = JSON.parse(pr_event);
+  const { number, html_url, title, body } = pr_event;
 
   console.log({
     number,
@@ -11,15 +17,19 @@ const sendSlackMessage = async (event_pr, slack_webhook_url) => {
     body,
   });
 
-  const text = `:rocket: *Production Release*\n\n*Title:* ${title} | <${html_url}|#${number}>\n*PR Description:*\n ${convertMarkdownToSlackFormat(
-    body
-  )}`;
-  console.log("text", text);
+  // Format message text for Slack
+  const text = `:rocket: *Production Release*\n\n
+  *Title:* ${title} | <${html_url}|#${number}>\n
+  *PR Description:*\n ${convertMarkdownToSlackFormat(body)}`;
 
+  console.log("slack text", text);
+
+  // Send message to Slack webhook
   const result = await fetch(slack_webhook_url, {
     method: "POST",
     body: JSON.stringify({ text }),
   }).catch(console.error);
+
   return result;
 };
 
