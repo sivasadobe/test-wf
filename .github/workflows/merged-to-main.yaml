@@ -58,8 +58,10 @@ jobs:
       - name: Check repository
         uses: actions/checkout@v4
       - name: Print Description
-        run: |
-          echo ${{github.event.inputs.body}}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log("PR_DESC",String(process.env.PR_DESC).split("\r\n").join("\n"))
       # Sending slack notification
       - name: Sending Notification - Slack
         uses: actions/github-script@v7
