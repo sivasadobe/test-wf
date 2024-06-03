@@ -6,7 +6,7 @@ const { convertMarkdownToSlackFormat } = require("./helpers");
  * @param {string} slack_webhook_url - Slack webhook URL
  * @returns {Promise} - Promise representing the result of the Slack message sending process
  */
-const sendSlackMessage = async (pr_event, slack_webhook_url) => {
+const sendReleaseNotes = async (pr_event, slack_webhook_url) => {
   pr_event = JSON.parse(pr_event);
   const { number, html_url, title, body } = pr_event;
 
@@ -35,4 +35,4 @@ const sendSlackMessage = async (pr_event, slack_webhook_url) => {
   return result;
 };
 
-module.exports = sendSlackMessage;
+module.exports = { sendReleaseNotes };
