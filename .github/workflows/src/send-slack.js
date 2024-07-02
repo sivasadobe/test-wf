@@ -60,6 +60,7 @@ const sendReleaseNotes = async (prNumber, slackWebHookURL) => {
     else {
       console.log(`Slack Message not sent ${result.status}:${result.statusText}`)
     }
+    console.log(result)
     return result;
   } catch (e) {
     console.log(e);
