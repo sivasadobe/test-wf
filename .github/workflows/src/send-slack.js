@@ -1,8 +1,7 @@
 const { parseTextToSlackBlocks } = require("./helpers");
 
 // Those env variables are set by an github action automatically
-const owner = process.env.REPO_OWNER || "";
-const repo = process.env.REPO_NAME || "";
+const [owner, repo]=process.env.GITHUB_REPOSITORY?.split('/') || '';
 const auth = process.env.GH_TOKEN;
 
 /**
@@ -46,7 +45,6 @@ const sendReleaseNotes = async (prNumber, slackWebHookURL) => {
     const slackBodyBlocks = {
       blocks: [...titleBlocks, ...formattedBodyBlocks],
     };
-    console.log("PR Number", prNumber);
     console.log("Message", slackBodyBlocks);
 
     // Send message to Slack webhook
@@ -58,6 +56,9 @@ const sendReleaseNotes = async (prNumber, slackWebHookURL) => {
       },
     }).catch(console.error);
     if (result.status === 200) console.log("Slack Message sent");
+    else {
+      console.log(`Slack Message not sent ${result.status}:${result.statusText}`)
+    }
     return result;
   } catch (e) {
     console.log(e);
