@@ -2,8 +2,7 @@ const { sendReleaseNotes } = require("./send-slack.js");
 const { parseTextToSlackBlocks } = require("./helpers.js");
 
 const pr_number = 24;
-const SLACK_WH_URL =
-  "https://hooks.slack.com/services/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";
+const SLACK_WH_URL =process.env.SLACK_WH_URL;
 
 const main = async () => {
   try {
