@@ -2,7 +2,7 @@ const { parseTextToSlackBlocks } = require("./helpers");
 
 // Those env variables are set by an github action automatically
 const [owner, repo]=process.env.GITHUB_REPOSITORY?.split('/') || '';
-const auth = process.env.GH_TOKEN;
+const auth = process.env.GITHUB_TOKEN;
 
 /**
  * Function to send Slack message
