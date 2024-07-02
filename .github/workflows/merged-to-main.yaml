@@ -65,4 +65,4 @@ jobs:
         with:
           script: |
             const {sendReleaseNotes} = require('./.github/workflows/src/send-slack.js')
-            sendReleaseNotes(process.env.PR_NUMBER,process.env.CC_RELEASE_SLACK_WH)
+            sendReleaseNotes(process.env.PR_NUMBER, process.env.CC_RELEASE_SLACK_WH)

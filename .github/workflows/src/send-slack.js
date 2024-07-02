@@ -11,7 +11,8 @@ const auth = process.env.GH_TOKEN;
  * @returns {Promise} - Promise representing the result of the Slack message sending process
  */
 const sendReleaseNotes = async (prNumber, slackWebHookURL) => {
-  console.log({ owner, repo, pr_number: prNumber });
+
+  console.log({ owner, repo, pr_number: prNumber, slackWebHookURL});
   try {
     prNumber = parseInt(prNumber);
     const { Octokit } = await import("@octokit/rest");
