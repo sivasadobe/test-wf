@@ -1,8 +1,7 @@
 const { parseTextToSlackBlocks } = require("./helpers");
 
 // Those env variables are set by an github action automatically
-const owner = process.env.REPO_OWNER || "";
-const repo = process.env.REPO_NAME || "";
+const [owner, repo]=process.env.GITHUB_REPOSITORY?.split('/') || '';
 const auth = process.env.GH_TOKEN;
 
 /**
