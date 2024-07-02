@@ -43,24 +43,25 @@ const sendReleaseNotes = async (prNumber, slackWebHookURL) => {
       },
     ];
 
-    const slackBodyBlocks = {
+    const slackBodyBlocks = JSON.stringify({
       blocks: [...titleBlocks, ...formattedBodyBlocks],
-    };
+    });
     console.log("Message", slackBodyBlocks);
 
     // Send message to Slack webhook
     const result = await fetch(slackWebHookURL, {
       method: "POST",
-      body: JSON.stringify(slackBodyBlocks),
+      body: slackBodyBlocks,
       headers: {
         "Content-type": "application/json",
       },
     }).catch(console.error);
+
     if (result.status === 200) console.log("Slack Message sent");
     else {
       console.log(`Slack Message not sent ${result.status}:${result.statusText}`)
     }
-    console.log(result)
+    console.log(result);
     return result;
   } catch (e) {
     console.log(e);
