@@ -1,0 +1,15 @@
+{
+  "name": "test-wf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:slack": "node --env-file=.env .github/workflows/src/test-send-slack.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@octokit/rest": "^21.0.0"
+  }
+}
