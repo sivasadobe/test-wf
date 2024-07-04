@@ -1,7 +1,7 @@
 name: Merged to Main
 
 on:
-  # Trigger this workflow when a pull request is closed and merged into the main branch
+  # Triggered when a pull request is closed or merged into the main branch
   pull_request:
     branches:
       - main
@@ -11,12 +11,12 @@ on:
   workflow_dispatch:
     inputs:
       pr_number:
-        description: "PR Number to use (optional for manual triggers)"
+        description: "PR Number"
         default: "200"
         required: true
 
 env:
-  # Slack webhook secret for sending release notes
+  # Slack webhook URL from secret
   CC_RELEASE_SLACK_WH: ${{ secrets.CC_RELEASE_SLACK_WH }}
 jobs:
   send_release_notes:
@@ -36,7 +36,7 @@ jobs:
         run: npm i -D @octokit/rest
 
       # Step to set PR_NUMBER environment variable from the pull request event
-      - name: Set PR Number
+      - name: Set PR Number from PR event
         if: ${{ github.event_name != 'workflow_dispatch' }}
         run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
